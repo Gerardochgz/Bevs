@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bevs</title>
+    <title>Bevs 🤍</title>
     <style>
+        /* === ESTILOS CSS GENERALES === */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #5d4037;
             overflow: hidden;
-            background-color: #fdf2f2;
         }
 
         .main-container {
@@ -28,59 +28,60 @@
             box-sizing: border-box;
         }
 
-        /* === SECCIÓN SUPERIOR === */
+        /* === SECCIÓN SUPERIOR (TEXTO Y VIDEO) === */
         .top-section {
             display: flex;
             width: 100%;
-            max-width: 1100px;
-            justify-content: space-around;
+            max-width: 1000px;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 40px;
-            z-index: 5;
+            z-index: 2;
         }
 
         .text-block {
-            width: 50%; 
+            width: 52%;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
 
         .text-block h2 {
-            font-weight: 400;
-            font-size: 1.8rem;
-            color: #d81b60;
+            font-weight: normal;
+            font-size: 1.4rem;
+            margin-top: 0;
             margin-bottom: 1.5rem;
         }
 
         .text-block p {
-            font-size: 1.15rem;
-            line-height: 1.7;
+            margin: 0 0 1rem 0;
         }
 
         .signature {
             display: block;
             margin-top: 2rem;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: bold;
             color: #d81b60;
         }
 
-
         .video-container {
-            width: 35%; 
-            max-width: 320px;
+            width: 42%; 
+            max-width: 400px;
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         video {
-            width: 100%; 
+            width: 100%;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             background-color: #000;
-            border: 5px solid white; 
+            border: 5px solid white;
         }
 
-        /* === LLUVIA DE CORAZONES === */
+        /* === CORAZONES CAYENDO === */
         .falling-hearts-stage {
             position: absolute;
             top: 0;
@@ -93,81 +94,101 @@
 
         .heart-particle {
             position: absolute;
-            color: #f06292;
             user-select: none;
             animation: heartFall linear infinite;
         }
 
         @keyframes heartFall {
-            0% { transform: translateY(-10vh) rotate(0deg) scale(0); opacity: 0; }
-            10% { opacity: 0.8; transform: translateY(0vh) rotate(15deg) scale(1); }
-            100% { transform: translateY(110vh) rotate(360deg) scale(0.7); opacity: 0; }
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg) scale(1); opacity: 0; }
         }
 
-        /* === CONTADOR INFERIOR === */
+        /* === SECCIÓN INFERIOR (CONTADOR) === */
         .counter-section {
             width: 100%;
             max-width: 1000px;
-            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 2;
+        }
+
+        .counter-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
         }
 
         .counter-line-container {
             width: 100%;
-            height: 50px;
-            background-color: rgba(255, 255, 255, 0.4);
-            border-radius: 30px;
+            height: 35px;
+            background-color: #f5f5f5; /* Un gris más suave que combina mejor */
+            border-radius: 20px;
             overflow: hidden;
             position: relative;
             display: flex;
             align-items: center;
-            border: 2px solid white;
-            backdrop-filter: blur(5px);
+            border: 1px solid #dcdcdc;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #ff80ab, #f06292);
-            width: 40%;
-            transition: width 1s ease-in-out;
+            background: linear-gradient(to left, #f5f5f5, #ffa7c5);
+            width: 0%;
+            transition: width 0.5s ease-out;
         }
 
         .counter-text-display {
             position: absolute;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            color: #333;
+            left: 20px;
+            color: #424242;
             font-size: 1.3rem;
             font-weight: bold;
+            display: flex;
+            gap: 5px;
+            align-items: baseline;
         }
 
-        .time-box {
-            background: #d81b60;
-            color: white;
-            padding: 2px 12px;
-            border-radius: 8px;
+        .time-number {
+            font-size: 1.6rem;
+        }
+
+        /* === FOOTER === */
+        footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #000000ad;
+            font-weight: bold;
+            opacity: 0.7;
+            z-index: 20;
         }
 
         @media (max-width: 768px) {
             .top-section { flex-direction: column-reverse; text-align: center; }
-            .text-block, .video-container { width: 100%; margin-top: 20px; max-width: 250px; margin-left: auto; margin-right: auto; }
-            .counter-text-display { font-size: 1rem; }
+            .text-block, .video-container { width: 100%; margin-top: 20px; }
+            .counter-text-display { font-size: 1rem; left: 10px; }
+            .time-number { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="main-container">
-        <div class="falling-hearts-stage" id="heartsStage"></div>
+        
+        <div class="falling-hearts-stage" id="fallingHeartsStage"></div>
 
         <div class="top-section">
             <div class="text-block">
                 <h2>Para el amor de mi vida:</h2>
-                <p>Si pudiera elegir un lugar seguro, sería a tu lado.</p>
-                <p>Cuanto más tiempo estoy contigo más te amo.</p>
-                <p>Cada momento en este video es un tesoro que guardo en mi corazón.</p>
-                <span class="signature">— Love You! _</span>
+                <p>Estamos hechos de polvo de estrellas, y te juro 
+                    que mis átomos reconocieron a los tuyos en cuanto te vi, fue como si el universo 
+                    finalmente se hubiera reencontrado consigo mismo. Gracias por ser mi cosmos, el 
+                    lugar donde mis átomos finalmente se sienten en casa. Te amo de aquí hasta el 
+                    plantea Miller (sin el "atajo").</p>
+                <span class="signature">—————————— TE AMO BAE ——————————</span>
             </div>
 
             <div class="video-container">
@@ -178,60 +199,78 @@
         </div>
 
         <div class="counter-section">
+            <p class="counter-title">Mi amor por ti comenzó hace...</p>
             <div class="counter-line-container">
-                <div class="progress-fill" id="pFill"></div>
-                <div class="counter-text-display" id="timer">
-                    Cargando...
+                <div class="progress-fill" id="progressFill"></div>
+                <div class="counter-text-display" id="counterTextDisplay">
+                    Calculando tiempo...
                 </div>
             </div>
         </div>
+
+        <footer>&copy;Gerardo_ChGz</footer>
     </div>
 
     <script>
+        // Fecha de inicio: 1 de febrero
         const startDate = new Date(2026, 1, 1, 0, 0, 0).getTime();
+        
+        const counterTextDisplay = document.getElementById('counterTextDisplay');
+        const progressFill = document.getElementById('progressFill');
+        const fallingHeartsStage = document.getElementById('fallingHeartsStage');
 
-        function updateTimer() {
+        function updateCounter() {
             const now = new Date().getTime();
-            const diff = now - startDate;
+            const difference = now - startDate;
 
-            if (diff < 0) {
-                document.getElementById('timer').innerHTML = "Cuenta atrás...";
+            if (difference < 0) {
+                counterTextDisplay.innerHTML = "Aún no ha empezado (Falta para el 01/02/2026)";
+                progressFill.style.width = "0%";
                 return;
             }
 
-            const d = Math.floor(diff / 86400000);
-            const h = Math.floor((diff % 86400000) / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
+            // Contador de tiempo total (no se reinicia)
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            document.getElementById('timer').innerHTML = `
-                <span class="time-box">${d}d</span> 
-                <span class="time-box">${h}h</span> 
-                <span class="time-box">${m}m</span> 
-                <span class="time-box">${s}s</span>
+            counterTextDisplay.innerHTML = `
+                <span class="time-number">${days}</span> días 
+                <span class="time-number">${hours}</span> horas 
+                <span class="time-number">${minutes}</span> minutos 
+                <span class="time-number">${seconds}</span> segundos
             `;
 
-            const progress = Math.min(100, (diff / (1000 * 60 * 60 * 24 * 365)) * 100);
-            document.getElementById('pFill').style.width = Math.max(10, progress) + '%';
+            // Lógica de reinicio de barra anual (cada 365 días)
+            const daysSinceStart = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const daysInCurrentCycle = daysSinceStart % 365;
+            
+            let progressPercent = (daysInCurrentCycle / 365) * 100;
+            
+            // Mantenemos un mínimo de 5% para que siempre se vea algo de color
+            progressPercent = Math.min(100, Math.max(5, progressPercent)); 
+            progressFill.style.width = progressPercent + '%';
         }
 
-        function createHeart() {
-            const stage = document.getElementById('heartsStage');
+        function createFallingHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-particle');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 20 + 12) + 'px';
-            const duration = Math.random() * 5 + 4;
+            const colors = ['#ff80ab', '#f06292', '#ec407a', '#f8bbd0'];
+            heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+            const size = Math.random() * 15 + 10;
+            heart.style.fontSize = size + 'px';
+            const duration = Math.random() * 5 + 5;
             heart.style.animationDuration = duration + 's';
-            stage.appendChild(heart);
-            setTimeout(() => heart.remove(), duration * 1000);
+            fallingHeartsStage.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, duration * 1000);
         }
 
-        setInterval(updateTimer, 1000);
-        setInterval(createHeart, 350);
-        updateTimer();
+        setInterval(createFallingHeart, 300);
+        updateCounter();
+        setInterval(updateCounter, 1000);
     </script>
-    <footer>Juan Gerardo Chavajay Gonzalez</footer>
 </body>
 </html>
