@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para el Amor de Mi Vida</title>
+    <style>
+        /* === ESTILOS GENERALES === */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #5d4037;
+            overflow: hidden;
+            background-color: #fdf2f2;
+        }
+
+        .main-container {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #fdf2f2 0%, #fce4e4 50%, #fbcaca 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* === SECCIÓN SUPERIOR === */
+        .top-section {
+            display: flex;
+            width: 100%;
+            max-width: 1100px;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 40px;
+            z-index: 5;
+        }
+
+        .text-block {
+            width: 50%; /* Le damos un poco más de espacio al texto */
+        }
+
+        .text-block h2 {
+            font-weight: 400;
+            font-size: 1.8rem;
+            color: #d81b60;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-block p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        .signature {
+            display: block;
+            margin-top: 2rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #d81b60;
+        }
+
+        /* --- VIDEO MÁS PEQUEÑO --- */
+        .video-container {
+            width: 35%; /* Reducido de 48% a 35% */
+            max-width: 320px; /* Límite de ancho para que no crezca demasiado */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        video {
+            width: 100%; /* Ocupa el 100% de su contenedor (los 320px) */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background-color: #000;
+            border: 5px solid white; /* Un pequeño marco blanco elegante */
+        }
+
+        /* === LLUVIA DE CORAZONES === */
+        .falling-hearts-stage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: #f06292;
+            user-select: none;
+            animation: heartFall linear infinite;
+        }
+
+        @keyframes heartFall {
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0); opacity: 0; }
+            10% { opacity: 0.8; transform: translateY(0vh) rotate(15deg) scale(1); }
+            100% { transform: translateY(110vh) rotate(360deg) scale(0.7); opacity: 0; }
+        }
+
+        /* === CONTADOR INFERIOR === */
+        .counter-section {
+            width: 100%;
+            max-width: 1000px;
+            z-index: 10;
+        }
+
+        .counter-line-container {
+            width: 100%;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            border: 2px solid white;
+            backdrop-filter: blur(5px);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff80ab, #f06292);
+            width: 40%;
+            transition: width 1s ease-in-out;
+        }
+
+        .counter-text-display {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .time-box {
+            background: #d81b60;
+            color: white;
+            padding: 2px 12px;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .top-section { flex-direction: column-reverse; text-align: center; }
+            .text-block, .video-container { width: 100%; margin-top: 20px; max-width: 250px; margin-left: auto; margin-right: auto; }
+            .counter-text-display { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="falling-hearts-stage" id="heartsStage"></div>
+
+        <div class="top-section">
+            <div class="text-block">
+                <h2>Para el amor de mi vida:</h2>
+                <p>Si pudiera elegir un lugar seguro, sería a tu lado.</p>
+                <p>Cuanto más tiempo estoy contigo más te amo.</p>
+                <p>Cada momento en este video es un tesoro que guardo en mi corazón.</p>
+                <span class="signature">— Love You! _</span>
+            </div>
+
+            <div class="video-container">
+                <video autoplay muted loop playsinline>
+                    <source src="amor.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
+            </div>
+        </div>
+
+        <div class="counter-section">
+            <div class="counter-line-container">
+                <div class="progress-fill" id="pFill"></div>
+                <div class="counter-text-display" id="timer">
+                    Cargando...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const startDate = new Date(2026, 1, 1, 0, 0, 0).getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = now - startDate;
+
+            if (diff < 0) {
+                document.getElementById('timer').innerHTML = "Cuenta atrás...";
+                return;
+            }
+
+            const d = Math.floor(diff / 86400000);
+            const h = Math.floor((diff % 86400000) / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
+
+            document.getElementById('timer').innerHTML = `
+                <span class="time-box">${d}d</span> 
+                <span class="time-box">${h}h</span> 
+                <span class="time-box">${m}m</span> 
+                <span class="time-box">${s}s</span>
+            `;
+
+            const progress = Math.min(100, (diff / (1000 * 60 * 60 * 24 * 365)) * 100);
+            document.getElementById('pFill').style.width = Math.max(10, progress) + '%';
+        }
+
+        function createHeart() {
+            const stage = document.getElementById('heartsStage');
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 20 + 12) + 'px';
+            const duration = Math.random() * 5 + 4;
+            heart.style.animationDuration = duration + 's';
+            stage.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
+        }
+
+        setInterval(updateTimer, 1000);
+        setInterval(createHeart, 350);
+        updateTimer();
+    </script>
+</body>
+</html>
