@@ -208,9 +208,9 @@
             </div>
 
             <div class="video-container">
-                <video id="miVideo" autoplay muted loop playsinline webkit-playsinline preload="auto">
-                    <source src="https://www.dropbox.com/scl/fi/bzpo90hl2d7riwexsvr1n/amor.mp4?rlkey=0u3x1h60d8ftd91al1xmwh6ta&st=3eyzkfpc&raw=1" type="video/mp4">
-                    Tu navegador no soporta videos.
+                <video autoplay muted loop playsinline webkit-playsinline preload="auto">
+                    <source src="https://raw.githubusercontent.com/Gerardochgz/Bevs/main/amor.mp4" type="video/mp4">
+                    <source src="https://github.com/Gerardochgz/Bevs/raw/main/amor.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -275,19 +275,6 @@
             setInterval(createHeart, 300);
             setInterval(updateCounter, 1000);
             updateCounter();
-                        // Forzar el inicio del video en móviles/Thunkable
-            window.addEventListener('load', function() {
-                const video = document.getElementById('miVideo');
-                
-                // Intentar reproducir automáticamente
-                video.play().catch(function(error) {
-                    console.log("El autoplay fue bloqueado por el navegador, reintentando...");
-                    // Si el navegador lo bloquea, lo intentamos de nuevo al primer toque en la pantalla
-                    document.body.addEventListener('click', () => {
-                        video.play();
-                    }, { once: true });
-                });
-            });
     </script>
 </body>
 </html>
